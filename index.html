@@ -32,6 +32,10 @@
         width: 100px;
         height: 100px;
       }
+
+      .loading-spinner {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -49,6 +53,12 @@
         />
         <button class="btn btn-primary" type="submit">Search</button>
       </form>
+
+      <!-- Loading Spinner -->
+      <div class="text-center loading-spinner" id="loading-spinner">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Loading data...</p>
+      </div>
 
       <!-- Weather Info -->
       <div id="weatherResult" class="d-none">

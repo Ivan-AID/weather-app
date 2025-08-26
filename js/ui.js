@@ -1,19 +1,29 @@
-const cityName = document.querySelector("cityName");
+const loadingSpinner = document.querySelector("#loading-spinner");
+
+const cityName = document.querySelector("#cityName");
 const weatherIcon = document.querySelector("#weatherIcon");
-const temperature = document.querySelector("#temperatrure");
+const temperature = document.querySelector("#temperature");
 const condition = document.querySelector("#condition");
-const country = document.querySelector("#country");
-const windSpeed = document.querySelector("#windSpeed");
+const errorMessage = document.querySelector("#errorMessage");
+const weatherResult = document.querySelector("#weatherResult"); 
 
-export const displayWeather = (data) => {
-  cityName.textContent = data.name;
-  weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].cityName}.png`;
-  temperature.textContent = `${data.main.temp} °C`;
-  condition.textContent = data.weather[0].description;
-  country.textContent = data.sys.country;
-  windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+export function displayWeather(data) {
+    errorMessage.classList.add("d-none");
+    weatherResult.classList.remove("d-none");
+
+    cityName.textContent = `${data.name}, ${data.sys.country}`;
+    temperature.textContent = `${Math.round(data.main.temp)}°C`;
+    condition.textContent = data.weather[0].description;
+    weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 }
 
-export function displayError(message) {
-  errorMessage.textContent = message;
+export function showError(message) {
+    weatherResult.classList.add("d-none");
+    errorMessage.classList.remove("d-none");
+    errorMessage.textContent = message;
 }
+
+export function loaderSpinner(isloading) {
+  loadingSpinner.style.display = isloading ? "block" : "none";
+}
+
